@@ -1,17 +1,14 @@
 version: '3'
 
 services:
-  php:
+  console:
     build:
-      context: .
-      args:
-        - uid=${uid}
-        - gid=${gid}
+      context: ./docker/console
     volumes:
       - .:/usr/src/yii2-fias
-    ports:
-      - '8000:80'
     environment:
+      UID: ${uid}
+      GID: ${gid}
       XDEBUG_CONFIG: ${XDEBUG_CONFIG}
     depends_on:
       - mysql
