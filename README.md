@@ -69,6 +69,31 @@
         ....
     ],
 ```` 
+У меня стало работать только после такой записи:
+
+````
+    'modules' => [
+        'fias' => [
+            'class' => \solbianca\fias\Module::class,
+        ],
+        ....
+    ],
+    
+    'components' => [
+        'loader' => [
+            'class' => \solbianca\fias\console\base\Loader::class,
+        ],
+        'importFias' => [
+            'class' => \solbianca\fias\console\components\ImportFiasComponent::class,
+        ],
+        'updateFias' => [
+            'class' => \solbianca\fias\console\components\UpdateFiasComponent::class
+        ]
+        ...
+    ]
+
+```` 
+
 
 Насройка отдельного подключения к БД:
 
