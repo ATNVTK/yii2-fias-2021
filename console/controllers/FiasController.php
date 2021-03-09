@@ -28,7 +28,7 @@ class FiasController extends Controller
     public function actionInstall($file = null, $version = null)
     {
         /** @var ImportFiasComponent $import */
-        $import = Instance::ensure('importFias', ImportFiasComponent::class, Module::getInstance());
+        $import = Instance::ensure('importFias', ImportFiasComponent::class, \Yii::$app->getModule('fias'));
         $import->import($file, $version);
     }
 
@@ -44,7 +44,7 @@ class FiasController extends Controller
     public function actionUpdate($fromVersion = null)
     {
         /** @var UpdateFiasComponent $update */
-        $update = Instance::ensure('updateFias', UpdateFiasComponent::class, Module::getInstance());
+        $update = Instance::ensure('updateFias', UpdateFiasComponent::class, \Yii::$app->getModule('fias'));
         $update->update($fromVersion);
     }
 
@@ -55,7 +55,7 @@ class FiasController extends Controller
     public function actionClearDirectory()
     {
         /** @var Loader $loader */
-        $loader    = Instance::ensure('loader', Loader::class, Module::getInstance());
+        $loader    = Instance::ensure('loader', Loader::class, \Yii::$app->getModule('fias'));
         $directory = $loader->fileDirectory;
         FileHelper::clearDirectory($directory);
         Console::output("Очистка каталога '{$directory}' завершена.");
