@@ -136,6 +136,6 @@ class FiasAddressObjectLevel extends ActiveRecord implements FiasModelInterface
      */
     public static function getDb()
     {
-        return Module::getInstance()->get('db');
+        return \Yii::$app->getModule('fias')->get('db');
     }
 }
