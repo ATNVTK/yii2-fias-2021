@@ -35,8 +35,8 @@ abstract class FiasComponent extends Component
     public function init()
     {
         parent::init();
-        $this->loader    = Instance::ensure('loader', Loader::class, Module::getInstance());
-        $this->db        = Instance::ensure('db', Connection::class, Module::getInstance());
+        $this->loader    = Instance::ensure('loader', Loader::class, \Yii::$app->getModule('fias'));
+        $this->db        = Instance::ensure('db', Connection::class, \Yii::$app->getModule('fias'));
     }
 
 
