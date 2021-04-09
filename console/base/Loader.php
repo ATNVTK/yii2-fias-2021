@@ -250,6 +250,7 @@ class Loader extends Component
                 continue;
             }
             $updates[] = new SoapResultWrapper($update);
+            array_multisort($updates, SORT_ASC);
         }
         return $updates;
     }
