@@ -57,10 +57,20 @@ trait UpdateModelTrait
                 Console::output("Inserted {$count} rows in tmp table.");
             }
         }
-
-        $count = static::getDb()->createCommand("DELETE old FROM {$tableName} old INNER JOIN {$tTableName} tmp
-          ON (old.id = tmp.previous_id OR old.id = tmp.id)")->execute();
-        Console::output("Удалено старых записей: {$count}");
+        
+        $count =1;
+        while ($count != 0) {
+            $ids = static::getDb()->createCommand("SELECT * FROM {$tableName} old INNER JOIN {$tTableName} tmp
+          ON (old.id = tmp.previous_id OR old.id = tmp.id) LIMIT 50000")->queryAll();
+            var_dump(count($ids));
+            if ($ids) {
+                $count = static::getDb()->createCommand()->delete($tableName,['in',  'id', ArrayHelper::getColumn($ids, 'id')])->execute();
+                Console::output("Удалено старых записей: {$count}");
+            }
+            else {
+                $count = 0;
+            }
+        }
 
         static::getDb()->createCommand()->dropColumn($tTableName, 'previous_id')->execute();
 
