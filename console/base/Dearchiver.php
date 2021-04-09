@@ -72,12 +72,12 @@ class Dearchiver
      */
     private static function doExtract($directoryForExtract, $pathToFile)
     {
-        mkdir($directoryForExtract);
-
+        mkdir($directoryForExtract, 0777, true);
         $pathToFile = escapeshellarg($pathToFile);
         $directoryForExtract = escapeshellarg($directoryForExtract);
 
-        exec('unrar e ' . $pathToFile . ' ' . $directoryForExtract . ' 2>&1', $output, $result);
+        exec('unzip -u ' . $pathToFile . ' -d ' . $directoryForExtract . ' 2>&1', $output, $result);
+        exec('chmod 777 -R ' . $directoryForExtract);
 
         if ($result !== 0) {
             throw new \Exception('Ошибка разархивации: ' . implode("\n", $output));
