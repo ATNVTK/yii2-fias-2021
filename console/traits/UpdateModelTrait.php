@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 use solbianca\fias\console\base\XmlReader;
 use solbianca\fias\models\FiasModelInterface;
 use yii\helpers\Console;
+use yii\helpers\ArrayHelper;
 
 /**
  * @mixin ActiveRecord
